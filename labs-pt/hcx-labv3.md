@@ -63,7 +63,7 @@ Agora que você está familiarizado com a instalação e configuração do HCX. 
 
 Fornecemos um vCenter local com máquinas virtuais para migrar. Com base no seu Student ##, selecione a VM apropriada para migrar.
 
-Na área de trabalho do Horizon (workshop.vmc.ninja), abra o google e acesse o vCenter local
+Na área de trabalho do Horizon (desktop.vmc.ninja), abra o google e acesse o vCenter local
 
 ** Observação: Consulte a página de acesso do aluno para fazer login na sua área de trabalho do Horizon https://vmc-field-team.github.io/student-access/**
 

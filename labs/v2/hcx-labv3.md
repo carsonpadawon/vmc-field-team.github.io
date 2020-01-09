@@ -71,7 +71,7 @@ Note: Be aware that the following exercise will use a pre-configured on-premise 
 
 We have provided an on-prem vCenter with virtual machines to migrate.  Based on your student ## please select the appropriate VM to migrate.
 
-From your Horizon desktop (workshop.vmc.ninja) open Google Chrome and access the on-prem vCenter
+From your Horizon desktop (desktop.vmc.ninja) open Google Chrome and access the on-prem vCenter
 
 {% capture notice-2 %}
 Note: Refer to the [Student Access](https://vmc-field-team.github.io/student-access/){:target="_blank"} page to log into your Horizon desktop

@@ -19,10 +19,10 @@ Downloaded the client and install.
 Once you have the Horizon client running.
 
 1. Click the *+* button to add a new connection server.
-2. Enter the connection server name as **workshop.vmc.ninja**
+2. Enter the connection server name as **desktop.vmc.ninja**
 3. You may be prompted to accept an untrusted certificate, please do so.
 
-You will now have a new Horizon session to connect to named **workshop.vmc.ninja** please click on this connection and you will be presented with a login prompt for the desktop session you will use for the class.
+You will now have a new Horizon session to connect to named **desktop.vmc.ninja** please click on this connection and you will be presented with a login prompt for the desktop session you will use for the class.
 
 Please use the credentials supplied to you by your Instructors
 
@@ -32,7 +32,7 @@ You may also access the environment through a web browser, if you do not want to
 
 Follow the steps below to access the desktop via the web browser
 
-[VMware Horizon HTML Portal Access](https://workshop.vmc.ninja/portal/webclient/index.html)
+[VMware Horizon HTML Portal Access](https://desktop.vmc.ninja/portal/webclient/index.html)
 
 The Password for these desktops will be shared by the instructor.
 

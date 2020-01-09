@@ -64,7 +64,7 @@ Ahora que ya está familiarizado en como instalar y configurar HCX, vamos a real
 
 Le hemos proveído un vCenter on-prem con máquinas virtuales para migrar. Dependiendo de su número asignado de estudiante ## favor selecione la máquina virtual respectiva para migrar.
 
-Desde su escritorio Horizon (workshop.vmc.ninja) abra Google Crhome y acceda a este vCenter on-prem.
+Desde su escritorio Horizon (desktop.vmc.ninja) abra Google Crhome y acceda a este vCenter on-prem.
 
 **Nota: Refiera a la página Student Access para iniciar una sesión al escritorio virtual Horizon si es necesario https://vmc-field-team.github.io/student-access/**
 
