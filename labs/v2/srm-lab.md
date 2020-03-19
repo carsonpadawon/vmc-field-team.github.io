@@ -151,7 +151,8 @@ Click *OVF & OVA Templates*
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost11.jpg)
 
-1. Right-click on the *Windows10* template and select *New VM from This Templat...*
+1. Right-click on the *Windows10* template 
+2. Select *New VM from This Templat...*
 
 If you do not have the menu item to deploy a New VM from this template, Click the *ACTIONS* dropdown menu for the content library and click *Synchronize* and wait until the sync is complete.
 
