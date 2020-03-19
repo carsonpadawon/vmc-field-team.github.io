@@ -24,11 +24,11 @@ PLEASE BE AWARE THAT THESE EXERCISES MUST BE PERFORMED FROM THE ASSIGNED HORIZON
 
 ![SRM1](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM1.jpg)
 
-1. Click on the *Add ons* tab
-2. Under the Site Recovery Add On, Click the *Activate* button
+1. Click on the *Add Ons* tab
+2. Under the Site Recovery Add On, Click the *ACTIVATE* button
 
     ![SRM2](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM2.jpg)
-3. In the pop up window Click *Activate* again
+3. In the pop up window Click *ACTIVATE* again
 
     ![SRM3](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM3.jpg)
 
@@ -54,42 +54,122 @@ VMware Site Recovery enables the testing of recovery plans, using a temporary co
 
 ## Create a Cross SDDC VPN
 
-We will be setting up an IPSEC VPN connection between your VPC and the VPC of the person you were paired with.
+We will be setting up an IPSEC VPN connection between your VPC and the VPC of the person you were paired with. Each student needs to complete the steps for your SDDC.
 
 ![SRM6](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM6.jpg)
 
-1. Go back to the *VMware Cloud on AWS* tab.
-2. In the main SDDC window, click on *View Details*
+1. Navigate back to *ALL SDDCs* and click on *VIEW DETAILS* for **the paired student's** SDDC.
 
     ![SRM7](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM7.jpg)
-3. Click on the *Network* menu
+
+2. Click on the *Networking & Security*
 
     ![SRM8](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM8.jpg)
 
-    In the Management Gateway section, make a note of the *Public IP* and the *Infrastructure Subnet CIDR*
+    In the Management Gateway section, make a note of the *VPN Public IP* and the *Infrastructure Subnet* CIDR
 
     ![SRM9](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM9.jpg)
 
-    In the Management Gateway settings below
-4. Click the drop down arrow to open the *IPsec VPNs* section
-5. Click on *ADD VPN*
+### Create a Policy Based VPN
+**Navigate back to the *VIEW DETAILS* section of *YOUR SDDC* to create the VPN to the *Paired Student's SDDC***
+
+On the Networking & Security tab
+1. Click *VPN* on the left-hand menu under Network
+2. Click *Policy Based*
+3. Click on *ADD VPN*
 
     ![SRM10](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM10.jpg)
 
-    Fill in the following information
-6. Name: Student # MGMT GW (where # is your peer's student number)
-7. The *Public IP address* of the persons Gateway you were paired with
-8. The *Infrastructure IP CIDR* of the person you were paired with
-9. Pre-shared key is **VMware1!**
-10. Click on *Save*
+    **Note that all workloads deployed in the module will be deployed to the *Demo-Net* Network Segment that was created in the *Working with your SDDC* module**
+
+    Fill in the following information:
+4. Enter *Student # MGMT GW* (where # is your peer's student number) in the *Name* field
+5. Ensure *Public IP* is selected for *Local IP Address*
+6. Enter the *VPN Public IP* address of the persons Management Gateway you were paired with for *Remote Public IP*
+7. Enter the paired student's Demo-Net Network Segment CIDR *10.10.x.0/24* where **X** is the paired student's number and enter the paired student's *Infrastructure Subnet CIDR* you noted earlier in the *Remote Networks* field
+8. Click the *Local Networks* field and select both *Demo-Net* and *Infrastructure Subnet*
+9. Enter **VMware1!** in the *Preshared Key* field
+10. Click *SAVE*
 
     ![SRM11](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM11.jpg)
 
-    When both you and the person you were paired with have completed these steps you should see the status of the VPN turn to **Connected**
+    When both you and the person you were paired with have completed these steps you should see the status of the VPN turn to **Success**
 
-    ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM12.jpg)
+## Deploy a Windows Jump Host & VPN
+**You will need to deploy a jump host and set up a second VPN from a jump host to the SDDC for this workshop setup to work.  This is not normally needed when setting up you on-premises environment to VMC, but it is need for this workshop.**
 
-    There will be a need to setup a second VPN to our Host infrastructure for this setup to work. This is not normally needed when setting up your on-premises environment but it's needed for the special setup in this workshop.
+### Create a New Content Library
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost1.jpg)
+
+From **your SDDC** copy the cloudadmin password and click *OPEN VCENTER*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost2.jpg)
+
+Enter the cloudadmin credentials and click *LOGIN*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost3.jpg)
+
+In the vSphere Client, click the *Menu* dropdown and click *Content Libraries*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost4.jpg)
+
+Click the **+** to add a new Content Library
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost5.jpg)
+
+1. Enter *Windows-Content-Library* in the *Name* field
+2. Click *NEXT*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost6.jpg)
+
+3. Click the radio button next to *Subscribed content library*
+4. Enter *https://s3-us-west-2.amazonaws.com/s3-vmc-iso/lib.json* in the *Subscription URL* field
+5. Click *NEXT*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost7.jpg)
+
+If you get a warning, click *YES*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost8.jpg)
+
+6. Select *Workload Datastore* for the storage location
+7. Click *NEXT*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost9.jpg)
+
+8. Click *FINISH*
+
+### Deploy a Windows VM
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost12.jpg)
+
+Click on your *Windows-Content-Library* that you just created
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost13.jpg)
+
+Click *OVF & OVA Templates*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost11.jpg)
+
+1. Right-click on the *Windows10* template and select *New VM from This Templat...*
+
+If you do not have the menu item to deploy a New VM from this template, Click the *ACTIONS* dropdown menu for the content library and click *Synchronize* and wait until the sync is complete.
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost10.jpg)
+
+
+
+### Set Up VPN for Jump Host to SDDC
+**THIS SCREENSHOT NEEDS CHANGED**
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM12.jpg)
+
+
+*OLD TEXT - There will be a need to setup a second VPN to our Host infrastructure for this setup to work. This is not normally needed when setting up your on-premises environment but it's needed for the special setup in this workshop.* 
+
+**NEW TEXT - You will need to set up a second VPN from a jump host to the SDDC for this workshop setup to work.  This is not normally needed when setting up you on-premises environment to VMC, but it is need for this workshop.**
+
+***THIS IS WHERE I LEFT OFF***
+
 11. Make sure the IPSecVPNs drop down is opened, if not click it under *Management Gateway*
 12. Click on *Add VPN*
 
