@@ -55,11 +55,11 @@ VMware Site Recovery enables the testing of recovery plans, using a temporary co
 
 ## Create a Cross SDDC VPN
 
-We will be setting up an IPSEC VPN connection between your VPC and the VPC of the person you were paired with. Each student needs to complete the steps for your SDDC.
+We will be setting up an IPSEC VPN connection between your VPC and the VPC of the person you were paired with. **Each student** needs to complete the steps for **your** SDDC.
 
 ![SRM6](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM6.jpg)
 
-1. Navigate back to *ALL SDDCs* and click on *VIEW DETAILS* for **the paired student's** SDDC.
+1. Navigate back to *ALL SDDCs* and click on *VIEW DETAILS* for **the paired student's** SDDC.  For example, if you are *Student-1*, you will view the details for the *Student-2* SDDC.
 
     ![SRM7](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM7.jpg)
 
@@ -85,7 +85,7 @@ On the Networking & Security tab
 
     Fill in the following information:
 4. Enter *Student # MGMT GW* (where # is your peer's student number) in the *Name* field
-5. Ensure *Public IP* is selected for *Local IP Address*
+5. Select *Public IP* for *Local IP Address*
 6. Enter the *VPN Public IP* address of the persons Management Gateway you were paired with for *Remote Public IP*
 7. Enter the paired student's Demo-Net Network Segment CIDR *10.10.x.0/24* where **X** is the paired student's number and enter the paired student's *Infrastructure Subnet CIDR* you noted earlier in the *Remote Networks* field
 8. Click the *Local Networks* field and select both *Demo-Net* and *Infrastructure Subnet*
@@ -144,11 +144,11 @@ If you get a warning, click *YES*
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost12.jpg)
 
-Click on your *Windows-Content-Library* that you just created
+Click on your *Windows-Content-Library* that you just created 
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost13.jpg)
 
-Click *OVF & OVA Templates*
+Click *OVF & OVA Templates* (wait a few seconds if all of the templates aren't listed, particularly the Windows10 template)
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost11.jpg)
 
@@ -194,7 +194,7 @@ If you do not have the menu item to deploy a New VM from this template, Click th
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost20.jpg)
 
-Navigate to the Jump Host VM you just deployed and note the **IP Address**
+**Navigate to the Jump Host VM you just deployed, power it on and note the IP Address**
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost21.jpg)
 
@@ -215,8 +215,8 @@ Navigate to the Jump Host VM you just deployed and note the **IP Address**
 
 1. Click *ADD NAT RULE*
 2. Enter *To Jump Host* in the *Name* field
-3. Enter the noted Public IP in the *Public IP* field
-4. Enter the noted IP Address for your Jump Host VM in the *Internal IP* field
+3. Enter the noted Public IP in the *Public IP* field (it should be pre-populated)
+4. Enter the noted internal IP Address for your Jump Host VM in the *Internal IP* field
 5. Click *SAVE*
 
 ### Create a Compute Gateway FW Rules to allow RDP to the Jump Host VM
@@ -232,7 +232,7 @@ Navigate to the Jump Host VM you just deployed and note the **IP Address**
 We will add a rule that will allow us to connect to our jump host via RDP
 
 4. Enter *RDP to Jump Host* in the *Name* field
-5. Hover over the *Destinations* filed and click the pencil icon
+5. Hover over the *Destinations* field and click the pencil icon
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost26.jpg)
 
@@ -284,22 +284,26 @@ We will add another rule that will allow outbound traffic from our jump host
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost34.jpg)
 
 23. Click *Management Gateway*
-24. If your *vCenter Inbound* rule does have *ICMP ALL* under *Services*, modify the rule to allow that service and **PUBLISH** the rule when complete.
+24. If your *vCenter Inbound* rule does not have *ICMP ALL* under *Services*, modify the rule to allow that service and **PUBLISH** the rule when complete.
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost35.jpg)
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost37.jpg)
 
-Navigate to the **Settings** for each student's SDDC - **this must be done on both SDDCs**
+25. Click *Settings* for your SDDC
+26. Click the *>* arrow next to *vCenter FQDN*
+27. Click *EDIT*
 
-25. Select the *Private IP* from the *Resolution Address* dropdown
-26. Click *SAVE*
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost38.jpg)
+
+28. Select the *Private IP* in the *Resolution Address* dropdown
+29. Click *SAVE*
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost36.jpg)
 
 Open **REMOTE DESKTOP CONNECTION** from **YOUR** desktop.  Do not open it from within the virtual desktop.
 
-27. Enter the *Public IP Address* that was allocated for your jump host
-28. Log in with *Administrator/VMware1!*
-29. Click *Connect*
+30. Enter the *Public IP Address* that was allocated for your jump host
+31. Log in with *Administrator/VMware1!*
+32. Click *Connect*
 
 *Click YES if you get a certificate error*
 
