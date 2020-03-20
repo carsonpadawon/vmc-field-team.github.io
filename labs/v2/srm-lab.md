@@ -148,7 +148,7 @@ Click on your *Windows-Content-Library* that you just created
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost13.jpg)
 
-Click *OVF & OVA Templates* (wait a few seconds if all of the templates aren't listed, particularly the Windows10 template)
+Click *OVF & OVA Templates* (wait a few seconds if all of the templates aren't listed, particularly the Windows2012r2 template)
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost11.jpg)
 
@@ -303,11 +303,26 @@ Open **REMOTE DESKTOP CONNECTION** from **YOUR** desktop.  Do not open it from w
 
 30. Enter the *Public IP Address* that was allocated for your jump host
 31. Log in with *Administrator/VMware1!*
-32. Click *Connect*
+32. Click *Connect* (Click *YES* if you get a certificate error)
 
-*Click YES if you get a certificate error*
+### Install Firefox or Chrome into the Windows VM
 
-**Download and install Firefox as there are issues with IE**
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost39.jpg)
+
+Internet Explorer does not work well, so you'll need to download and install Firefox or Chrome into your Jump Host VM.
+
+If **Server Manager** does not automatically open, open it.
+
+1. Click *Local Server*
+2. Click *On* next to *IE Enhanced Security Configuration*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost40.jpg)
+
+3. Click the radio button next to *Off* under *Administrators*
+4. Click the radio button next to *Off* under *Users*
+5. Click *OK*
+
+**Download and install Firefox or Chrome in your Jump Host**
 
 **Open IE and enter the FQDN for your vCenter server in your SDDC**
 
