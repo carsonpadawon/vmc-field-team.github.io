@@ -95,7 +95,7 @@ On the Networking & Security tab
 
     When both you and the person you were paired with have completed these steps you should see the status of the VPN turn to **Success**
 
-## Deploy a Windows Jump Host & VPN
+## Deploy a Windows Jump Host
 **You will need to deploy a jump host and set up a second VPN from a jump host to the SDDC for this workshop setup to work.  This is not normally needed when setting up you on-premises environment to VMC, but it is need for this workshop.**
 
 ### Create a New Content Library
@@ -139,7 +139,7 @@ If you get a warning, click *YES*
 
 8. Click *FINISH*
 
-### Deploy a Windows VM
+### Deploy a VM from Content Library
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost12.jpg)
 
@@ -152,14 +152,164 @@ Click *OVF & OVA Templates*
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost11.jpg)
 
 1. Right-click on the *Windows10* template 
-2. Select *New VM from This Templat...*
+2. Select *New VM from This Template...*
 
-If you do not have the menu item to deploy a New VM from this template, Click the *ACTIONS* dropdown menu for the content library and click *Synchronize* and wait until the sync is complete.
+If you do not have the menu item to deploy a New VM from this template, Click the *ACTIONS* dropdown menu for the content library and click *Synchronize* (shown below) and wait until the sync is complete.
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost10.jpg)
 
+### Deploy a Windows VM
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost14.jpg)
+
+1. Enter *Jump Host* for the *Virtual machine name*
+2. Select the *Workloads* folder
+3. Click *NEXT*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost15.jpg)
+
+4. Select the *Compute-ResourcePool*
+5. Click *NEXT*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost16.jpg)
+
+6. Click *NEXT*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost17.jpg)
+
+7. Select the *WorkloadDatastore*
+8. Click *NEXT*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost18.jpg)
+
+9. Select *Demo-Net* from the *Destination Network* dropdown list  (this network was created in the Working With Your SDDC module)
+10. Click *NEXT*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost19.jpg)
+
+11. Click *FINISH*
+
+### Request a Public IP for the Jump Host
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost20.jpg)
+
+Navigate to the Jump Host VM you just deployed and note the **IP Address**
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost21.jpg)
+
+1. Back in your SDDC, navigate to *Networking & Security*
+2. Click *Public IPs* in the left-hand navigation menu
+3. Click *REQUEST NEW IP*
+4. Enter *Jump Host* in for the *Notes*
+5. Click *SAVE*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost22.jpg)
+
+6. Note the *Public IP* that was just provided
+7. Click *NAT* in the left-hand navigation menu
+
+### Create a NAT rule for the Jump Host
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost23.jpg)
+
+1. Click *ADD NAT RULE*
+2. Enter *To Jump Host* in the *Name* field
+3. Enter the noted Public IP in the *Public IP* field
+4. Enter the noted IP Address for your Jump Host VM in the *Internal IP* field
+5. Click *SAVE*
+
+### Create a Compute Gateway FW Rules to allow RDP to the Jump Host VM
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost24.jpg)
+
+1. Click *Gateway Firewall* in the left-hand navigation menu
+2. Click *Compute Gateway*
+3. Click *ADD RULE*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost25.jpg)
+
+We will add a rule that will allow us to connect to our jump host via RDP
+
+4. Enter *RDP to Jump Host* in the *Name* field
+5. Hover over the *Destinations* filed and click the pencil icon
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost26.jpg)
+
+We will add a group that contains our jump host's internal IP address
+
+6. Click "ADD GROUP"
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost27.jpg)
+
+7. Enter *Jump Host* in the *Name* field
+8. Click *Set Members*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost28.jpg)
+
+9. Click IP/MAC Addresses
+10. Click in the IP/MAC Addresses field and enter the interal IP of your jump host
+11. Click *APPLY*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost29.jpg)
+
+Note that under Compute Members it now shows 1 IPs/MACS
+
+12. Click *SAVE*
+13. Click *APPLY*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost30.jpg)
+
+14. Hover over the *Services* field and click the pencil icon
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost31.jpg)
+
+15. Enter *RDP* into the *Search* field
+16. Click the checkbox next to *RDP*
+17. Click *APPLY*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost32.jpg)
+
+18. Click *PUBLISH* to publish this new rule
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost33.jpg)
+
+We will add another rule that will allow outbound traffic from our jump host
+
+19. Click *ADD RULE*
+20. Enter *Jump Host Outbound* into the *Name* field
+21. Select the *Jump Host* group you created previously for *Sources*
+22. Click *PUBLISH*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost34.jpg)
+
+23. Click *Management Gateway*
+24. If your *vCenter Inbound* rule does have *ICMP ALL* under *Services*, modify the rule to allow that service and **PUBLISH** the rule when complete.
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost35.jpg)
+
+Navigate to the **Settings** for each student's SDDC - **this must be done on both SDDCs**
+
+25. Select the *Private IP* from the *Resolution Address* dropdown
+26. Click *SAVE*
+
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost36.jpg)
+
+Open **REMOTE DESKTOP CONNECTION** from **YOUR** desktop.  Do not open it from within the virtual desktop.
+
+27. Enter the *Public IP Address* that was allocated for your jump host
+28. Log in with *Administrator/VMware1!*
+29. Click *Connect*
+
+*Click YES if you get a certificate error*
+
+**Download and install Firefox as there are issues with IE**
+
+**Open IE and enter the FQDN for your vCenter server in your SDDC**
+
+**Test on another tab to make sure you can navigate to the vCenter on your partner’s SDDC**
 
 
+# REMOVE THESE START
 ### Set Up VPN for Jump Host to SDDC
 **THIS SCREENSHOT NEEDS CHANGED**
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM12.jpg)
@@ -168,8 +318,6 @@ If you do not have the menu item to deploy a New VM from this template, Click th
 *OLD TEXT - There will be a need to setup a second VPN to our Host infrastructure for this setup to work. This is not normally needed when setting up your on-premises environment but it's needed for the special setup in this workshop.* 
 
 **NEW TEXT - You will need to set up a second VPN from a jump host to the SDDC for this workshop setup to work.  This is not normally needed when setting up you on-premises environment to VMC, but it is need for this workshop.**
-
-***THIS IS WHERE I LEFT OFF***
 
 11. Make sure the IPSecVPNs drop down is opened, if not click it under *Management Gateway*
 12. Click on *Add VPN*
@@ -183,30 +331,23 @@ If you do not have the menu item to deploy a New VM from this template, Click th
 16. Pre-shared key is **VMware1!**
 17. Click on *Save*
 
+# REMOVE THESE END
+
 ## Prepare and Pair Site Recovery
 
 ### Firewall Rules for Site Recovery
 
-For this module we will utilize the brand new *Firewall Rule Accelerator* option in the VMware
-Cloud on AWS portal.
+We will need to create Management Gateway firewall rules to allow for additional management gateway traffic including Site Recovery and vSphere Replication traffic.
 
-The firewall rule accelerator will create a group of firewall rules for a set of use cases. The
-Remote Network of the selected VPN will be used as the source or destination for these rules.
-You can edit the rules in the Firewall Rules section after they are created if desired although
-there should be no need to edit them.
+![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRMNew1.jpg)
 
-![SRM14](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM14.jpg)
+Navigate to **Management Gateway** firewall rules for **your** SDDC
 
-1. Click on the *Network* tab
-2. Expand the *Firewall Rule Accelerator* area
-3. For Rule Group select *Site Recovery* option
-4. For VPN Select the VPN created against the Student you were paired up with, and you will repeat the same process for the VPN created to the Host infrastructure.
-    * MAKE SURE TO REPEAT THIS STEP FOR BOTH VPN'S CREATED, THE ONE WITH YOUR PEER STUDENT, AND THE ONE FOR THE HOST.
-5. Click on *Create Firewall Rules*
+Add the additional ***five*** rules that are shown in the red box with the exception of your *vCenter Inbound Rule* which should already exist.
 
-Watch as the firewall rules get created automatically for you. Once completed, repeat for second VPN, once that one completes you can examine the firewall rules created.
+Ask your instructor if you need assistance with creating the management gateway firewall rules. 
 
-![SRM15](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM15.jpg)
+When you have created the additional rules, be sure the **PUBLISH** them
 
 ### VMware Site Recovery - Site Pairing
 
