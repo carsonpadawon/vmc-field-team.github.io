@@ -520,38 +520,93 @@ Once logged in to your partner's SDDC, you will see the *Site Pair Summary*
 ![SRM37](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM37.jpg)
 
 1. Select *Storage Policy Mappings* in the left pane
-2. Click *+ New*
+2. Click *+ NEW*
 
     ![SRM38](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM38.jpg)
+
 3. Select *Prepare mappings manually*
-4. Click *Next*
+4. Click *NEXT*
 
     ![SRM39](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM39.jpg)
-5. Click to select *Datastore Default* on both the left and right pane
-6. Click *ADD MAPPINGS*
-7. Click *NEXT*
+
+5. Click the *checkbox* next to *vSAN Default Storage Policy* on the left
+6. Click the *radio button* next to *vSAN Default Storage Policy* on the right
+7. Click *ADD MAPPINGS*
+
+    ![SRM39-b](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM39-b.jpg)
+
+8. Click *NEXT*
 
     ![SRM40](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM40.jpg)
-8. Click *Datastore Default* for Reverse mappings
-9. Click *NEXT*
+
+9. Click the *checkbox* next to *vSAN Default Storage Policy* for Reverse mappings
+10. Click *NEXT*
 
     ![SRM41](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM41.jpg)
-10. Click *FINISH*
+
+11. Click *FINISH*
 
 ### Placeholder Datastores
 
 ![SRM42](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM42.jpg)
 
 1. Select *Placeholder Datastores* in the left pane
-2. Click *+ New*
+2. Click *+ NEW*
 
     ![SRM43](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM43.jpg)
-3. Select *WorkloadDatastore*
-4. Click *Add*
+
+3. Click the *checkbox* next to *WorkloadDatastore*
+4. Click *ADD*
+
+    ![SRM43-a](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM43-a.jpg)
+
+For Placeholder Datastores, you must select a datastore at each side, so you'll repeat the same steps for the other vCenter.
+
+5. Click the *vCenter entry* for the vCenter that you are **paired with**
+6. Click *+ NEW*
+
+    ![SRM43-b](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM43-b.jpg)
+
+7. Click the *checkbox* next to *WorkloadDatastore*
+8. Click *ADD*
+
+## Create VMs to use wtih Site Recovery
+
+You will now create four VMs to use for Site Recovery.
+
+Navigate back to the vSphere client for ***YOUR SDDC***
+
+If you need to log back in to your SDDC thru the VMC console, use the *cedxx@vmware-hol.com* userid provided to you at the beginning and the password of *VMware1!*
+
+![SRM70](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM70.jpg)
+
+TEST
+    ![SRM71](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM71.jpg) 
+
+TEST
+    ![SRM72](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM72.jpg) 
+
+TEST
+    ![SRM73](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM73.jpg)
+
+TEST
+    ![SRM74](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM74.jpg)
+
+TEST
+    ![SRM75](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM75.jpg)
+
+TEST
+    ![SRM76](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM76.jpg)
+
+TEST
+    ![SRM77](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM77.jpg)
+
+TEST
+    ![SRM78](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM78.jpg)
 
 ## SRM - Protect a VM
 
-![SRM43](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM44.jpg)
+![SRM44](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM44.jpg)
 
 1. Select a VM to replicate and right-click
 2. Select *All Site Recovery actions*
@@ -562,7 +617,7 @@ Once logged in to your partner's SDDC, you will see the *Site Pair Summary*
     ![SRM45](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM45.jpg)
 4. Click *Next*
 
-    ![SRM43](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM46.jpg)
+    ![SRM46](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM46.jpg)
 5. Select the Target Site
 6. If not logged in you may need to login (Remember this is your partner's site not yours)
 
