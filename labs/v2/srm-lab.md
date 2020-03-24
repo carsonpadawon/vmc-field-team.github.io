@@ -580,29 +580,60 @@ If you need to log back in to your SDDC thru the VMC console, use the *cedxx@vmw
 
 ![SRM70](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM70.jpg)
 
-TEST
+1. From ***YOUR SDDC*** vSphere Client, Click *Menu*
+
+2. Click *Content Libraries*
+
     ![SRM71](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM71.jpg) 
 
-TEST
+3. Click the *Windows-Content-Library*
+
     ![SRM72](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM72.jpg) 
 
-TEST
+4. Click *Templates*
+
+5. Click *OVF & OVA Templates*
+
+6. Right-click the *Windows2012r2* template
+
+7. Click *New VM from This Template...*
+
     ![SRM73](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM73.jpg)
 
-TEST
+8. Enter *CRM-APP-xx* where *xx* is **your student ID number**
+
+9. Select *Workloads*
+
+10. Click *NEXT*
+
     ![SRM74](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM74.jpg)
 
-TEST
+11. Select *Compute-ResourcePool*
+12. Click *NEXT*
+
     ![SRM75](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM75.jpg)
 
-TEST
+13. Click *NEXT*
+
     ![SRM76](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM76.jpg)
 
-TEST
+14. Select *WorkloadDatastore*
+15. Click *NEXT*
+
     ![SRM77](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM77.jpg)
 
-TEST
+16. Select *Demo-Net* from teh *Destination Network* dropdown listbox
+17. Click *NEXT*
+
     ![SRM78](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM78.jpg)
+
+18. Click *FINISH*
+
+    **REPEAT the steps above three more times and create VMs named *CRM-DB-xx, FIN-APP-xx, and FIN-DB-xx* where *xx* is your Student ID number**
+
+    ![SRM79](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM79.jpg)
+
+19. After you have created all four of your VMs, navigate to the VMs in the vSphere Client and ***Power On*** all four VMs.
 
 ## SRM - Protect a VM
 
