@@ -413,72 +413,107 @@ Once logged in to your partner's SDDC, you will see the *Site Pair Summary*
 ## Configure Mappings
 ### Configure Network Mappings
 
-![SRM20](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM22.jpg)
+![SRM22](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM22.jpg)
 
 1. Click *Network Mappings* in the left pane of the Site Recovery page
-2. Click *New*
+2. Click *+ NEW*
 
     ![SRM23](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM23.jpg)
 3. Select *Prepare mappings manually*
-4. Click *Next*
+4. Click *NEXT*
 
     ![SRM24](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM24.jpg)
 5. Expand *SDDC Datacenter* on both sides
-6. Expand *Management Networks* on both sides
-7. Expand *vmc-dvs* on both sides
-8. Select your *Student#-LN* network and your partner's *Student#-LN* (You may need to scroll down to fid these networks)
-9. Click the *Add Mappings* button
-10. Click *Next*
+6. Expand *VMC Networks* on both sides
+7. Click the *checkbox* next to *Demo-Net* on the left
+8. Click the *radio button* next to *Demo-Net* on the right
+9. Click *ADD MAPPINGS*
+
+    ![SRM24-a](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM24-a.jpg)
+
+10. Click the *checkbox* next to *sddc-cgw-network-1* on the left
+11. Click the *radio button* next to *sddc-cgw-network-1* on the right
+12. Click *ADD MAPPINGS*
+
+    ![SRM24-b](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM24-b.jpg)
+
+13. Ensure both network mappings have been created
+14. Click *NEXT*
 
     ![SRM25](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM25.jpg)
-11. DO NOT enter or select anything in Reverse Mappings, click *Next*
-12. Leave defaults and click *Next*
+
+    DO NOT select anything in Reverse Mappings
+
+15. Click *NEXT*
+
+    ![SRM26](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM26.jpg)
+
+16. Click *NEXT*
 
     ![SRM27](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM27.jpg)
-13. Click *Finish*
+
+17. Click *FINISH*
 
 ### Folder mappings
 
 ![SRM28](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM28.jpg)
 
 1. Select *Folder Mappings* in the left pane
-2. Click *+ New* to create a new folder mapping
+2. Click *+ NEW
 
     ![SRM29](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM29.jpg)
 3. Select *Prepare mappings manually*
 4. Click *Next*
 
     ![SRM30](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM30.jpg)
-5. Expand *SDDC Datacenter* on both sides
-6. Select *Workloads* on both sides
-7. Click the *Add Mappings* button
-8. Click *Next*
+5. Expand *vcenter...* on both sides
+6. Expand *SDDC-Datacenter* on both sides
+7. Click the *checkbox* next to *Workloads* on the left
+8. Click the *radio button* next to *Workloads* on the right
+9. Click *ADD MAPPINGS*
+
+    ![SRM30-a](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM30-a.jpg)
+
+10. Click *NEXT*
 
     ![SRM31](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM31.jpg)
-9. DO NOT select any Reverse mappings, click *Next*
+
+    DO NOT select any Reverse mappings
+
+11. Click *NEXT*
 
     ![SRM32](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM32.jpg)
-10. Click *Finish*
+
+12. Click *FINISH*
 
 ### Resource Mappings
 
 ![SRM33](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM33.jpg)
 
 1. Click *Resource Mappings* in the left pane
-2. Click *+ New*
+2. Click *+ NEW*
 
     ![SRM34](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM34.jpg)
-3. Expand *SDDC Datacenter* on both sides
-4. Expand *Cluster 1* on both sides
-5. Select *Compute-ResourcePool* on both sides
-6. Click *Add Mappings* button
-7. Click *Next*
+
+3. Expand *SDDC-Datacenter* on both sides
+4. Expand *Cluster-1* on both sides
+5. Click the *checkbox* next to *Compute-ResourcePool* on the left
+6. Click the *radio button* next to *Compute-ResourcePool* on the right
+7. Click *ADD MAPPINGS*
+
+    ![SRM34-a](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM34-a.jpg)
+    
+8. Click *NEXT*
 
     ![SRM35](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM35.jpg)
-8. DO NOT select any reverse mappings, click *Next*
+    
+    DO NOT select any reverse mappings
+
+9. Click *NEXT*
 
     ![SRM36](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM36.jpg)
-9. Click *Finish*
+
+10. Click *FINISH*
 
 ### Storage Policy Mappings
 
