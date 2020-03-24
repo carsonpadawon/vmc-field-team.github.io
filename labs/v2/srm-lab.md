@@ -322,75 +322,42 @@ If **Server Manager** does not automatically open, open it.
 4. Click the radio button next to *Off* under *Users*
 5. Click *OK*
 
-**Download and install Firefox or Chrome in your Jump Host**
+### Test Connectivity
 
-**Open IE and enter the FQDN for your vCenter server in your SDDC**
+Download and install Firefox or Chrome in your Jump Host
 
-**Test on another tab to make sure you can navigate to the vCenter on your partner’s SDDC**
+Open your browser and enter the FQDN, found under Settings, for your vCenter server in your SDDC
 
+Open another tab and enter the FQDN for the vCenter for your paired SDDC
 
-# REMOVE THESE START
-### Set Up VPN for Jump Host to SDDC
-**THIS SCREENSHOT NEEDS CHANGED**
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM12.jpg)
-
-
-*OLD TEXT - There will be a need to setup a second VPN to our Host infrastructure for this setup to work. This is not normally needed when setting up your on-premises environment but it's needed for the special setup in this workshop.* 
-
-**NEW TEXT - You will need to set up a second VPN from a jump host to the SDDC for this workshop setup to work.  This is not normally needed when setting up you on-premises environment to VMC, but it is need for this workshop.**
-
-11. Make sure the IPSecVPNs drop down is opened, if not click it under *Management Gateway*
-12. Click on *Add VPN*
-
-    ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM13.jpg)
-
-    Fill in the following information
-13. Name this VPN **Student# to Host** (where # is your student number)
-14. Enter **54.70.191.234** for the Remote Gateway Public IP
-15. Enter **192.168.30.0/24** under Remote Networks
-16. Pre-shared key is **VMware1!**
-17. Click on *Save*
-
-# REMOVE THESE END
+**If you can navigate to both vCenters via their FQDN's, all connectivity is established correctly. The remainder of the work can be completed from your Remote Desktop connection to your Jump Host.**
 
 ## Prepare and Pair Site Recovery
 
 ### Firewall Rules for Site Recovery
 
-We will need to create Management Gateway firewall rules to allow for additional management gateway traffic including Site Recovery and vSphere Replication traffic.
+We will need to create Management Gateway firewall rules to allow for additional management gateway traffic including Site Recovery and vSphere Replication traffic. This needs to be done in both SDDCs.
 
 ![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRMNew1.jpg)
 
-Navigate to **Management Gateway** firewall rules for **your** SDDC
-
-Add the additional ***five*** rules that are shown in the red box with the exception of your *vCenter Inbound Rule* which should already exist.
-
-Ask your instructor if you need assistance with creating the management gateway firewall rules. 
-
-When you have created the additional rules, be sure the **PUBLISH** them
+1. In your SDDC, click *Networking & Security*
+2. Click *Gateway Firewall* in the left-hand navigation menu
+3. Click *Management Gateway*
+4. Add the additional **four** rules that are shown above. Ask your instructor if you need assistance with creating the management gateway firewall rules. 
+5. Click *PUBLISH*
 
 ### VMware Site Recovery - Site Pairing
 
-*IMPORTANT NOTE*: Only one person can do the Site Pairing exercise. Please decide between you and your partner who performs this step.
+![SRM18](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM18.jpg)
 
-![SRM16](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM16.jpg)
+You will be pairing to the other SDDC that is in your workshop organization.  Before beginning, each student needs to navigate to their partner's SDDC and save the vCenter FQDN and cloudadmin password.
 
-1. On your VMware Cloud on AWS Portal click on the *Add Ons* tab
-2. Click *Open Site Recovery*
-
-    ![SRM17](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM17.jpg)
-3. Click on *New Site Pair*
-
-    You will be pairing the partner site that was assigned to you by your instructor, note that this is not the information for your SDDC used up until now.
-
-    ![SRM18](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM18.jpg)
-
-    This is the information your partner will need from you and you will need from your partner's site.
-4. Click on the *Settings* tab in your SDDC
-
+1. Click *Settings* for your **partner's SDDC**
+ 
     The username on both sides (yours and your peer) will always be *cloudadmin@vmc.local*
-5. Copy or note the password for the vCenter Server user
-6. Note the URL for the vCenter server and the format it's displayed versus the format it should be used:
+
+2. Copy your partner's cloudadmin password and save it to notepad
+3. Copy your partners vCenter FQDN.  Before saving it to notepad, change the format from what is displayed to what will be used, as shown below:
 
     *DISPLAYED*:
 
@@ -404,24 +371,46 @@ When you have created the additional rules, be sure the **PUBLISH** them
     vcenter.sddc-xx-xxx-xx-xx.vmc.vmware.com
     ```
 
+![SRM16](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM16.jpg)
+
+***IMPORTANT NOTE*: Only one person can do the Site Pairing exercise. Please decide between you and your partner who performs this step.**
+
+1. Navigate to the SDDC of the student that will do the site pairing and click *Add Ons*
+2. Click *OPEN SITE RECOVERY* (*If necessary, login with the cloudadmin credentials for that SDDC*)
+
+
+    ![SRM17](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM17.jpg)
+
+3. Click *NEW SITE PAIR*
+
     ![SRM19](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM19.jpg)
-7. Make sure your local vCenter is selected
-8. Enter the information from your partner's SDDC:
-
-    PSC host name (make sure to enter the correct format as noted above)
-
-    User name
-
-    Password
+4. Enter the *vCenter FQDN* of your partner's SDDC in the format **vcenter.sddc-xx-xxx-xx-xx.vmc.vmware.com** in the *PSC host name* field
+5. Enter *cloudadmin@vmc.local* in the *User name* field
+6. Enter the *cloudadmin password* of your partner's SDDC into the *Password* field
+7. Click *NEXT*
 
     ![SRM20](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM20.jpg)
-9. Make sure local vCenter server is selected
-10. Select all Services
-11. Click *Next*
+8. Click the *top-level checkbox* to select all Services
+9. Click *NEXT*
 
     ![SRM21](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM21.jpg)
-12. Click *Finish* button
+10. Click *FINISH*
 
+    ![SRMNew2](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRMNew2.jpg)
+
+11. Click *VIEW DETAILS*
+
+    ![SRMNew3](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRMNew3.jpg)
+
+12. Enter *cloudadmin@vmc.local* for the *User name*
+13. Enter the cloudadmin password for your **partner's SDDC** for the *Password*
+14. Click *LOG IN*
+
+    ![SRMNew4](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRMNew4.jpg)
+
+Once logged in to your partner's SDDC, you will see the *Site Pair Summary*
+
+## Configure Mappings
 ### Configure Network Mappings
 
 ![SRM20](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM22.jpg)
