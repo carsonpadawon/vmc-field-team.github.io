@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Site Recovery Manager (SRM) Lab Manual"
-date: 2018-07-20
+date: 2020-03-25
 tags: workshop
 toc: true
 classes: wide
@@ -97,106 +97,107 @@ On the Networking & Security tab
     When both you and the person you were paired with have completed these steps you should see the status of the VPN turn to **Success**
 
 ## Deploy a Windows Jump Host
-**You will need to deploy a jump host and set up a second VPN from a jump host to the SDDC for this workshop setup to work.  This is not normally needed when setting up you on-premises environment to VMC, but it is need for this workshop.**
+**DRaaS requires a form of private connectivity, not just between the two sites (SDDCs in this workshop environment) but also between the Site Recovery UI and the location you open it from.  As a result, accessing Site Recovery over the internet via public IP will not work. To address this, we will create a Windows Jump Host in our SDDC and RDP to that jump host to work with Site Recovery.**
 
 ### Create a New Content Library
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost1.jpg)
+
+![JumpHost1](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost1.jpg)
 
 From **your SDDC** copy the cloudadmin password and click *OPEN VCENTER*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost2.jpg)
+![JumpHost2](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost2.jpg)
 
 Enter the cloudadmin credentials and click *LOGIN*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost3.jpg)
+![JumpHost3](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost3.jpg)
 
 In the vSphere Client, click the *Menu* dropdown and click *Content Libraries*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost4.jpg)
+![JumpHost4](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost4.jpg)
 
 Click the **+** to add a new Content Library
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost5.jpg)
+![JumpHost5](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost5.jpg)
 
 1. Enter *Windows-Content-Library* in the *Name* field
 2. Click *NEXT*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost6.jpg)
+![JumpHost6](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost6.jpg)
 
 3. Click the radio button next to *Subscribed content library*
 4. Enter *https://s3-us-west-2.amazonaws.com/s3-vmc-iso/lib.json* in the *Subscription URL* field
 5. Click *NEXT*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost7.jpg)
+![JumpHost7](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost7.jpg)
 
 If you get a warning, click *YES*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost8.jpg)
+![JumpHost8](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost8.jpg)
 
 6. Select *Workload Datastore* for the storage location
 7. Click *NEXT*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost9.jpg)
+![JumpHost9](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost9.jpg)
 
 8. Click *FINISH*
 
 ### Deploy a VM from Content Library
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost12.jpg)
+![JumpHost12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost12.jpg)
 
 Click on your *Windows-Content-Library* that you just created 
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost13.jpg)
+![JumpHost13](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost13.jpg)
 
 Click *OVF & OVA Templates* (wait a few seconds if all of the templates aren't listed, particularly the Windows2012r2 template)
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost11.jpg)
+![JumpHost11](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost11.jpg)
 
 1. Right-click on the *Windows10* template 
 2. Select *New VM from This Template...*
 
 If you do not have the menu item to deploy a New VM from this template, Click the *ACTIONS* dropdown menu for the content library and click *Synchronize* (shown below) and wait until the sync is complete.
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost10.jpg)
+![JumpHost10](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost10.jpg)
 
 ### Deploy a Windows VM
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost14.jpg)
+![JumpHost14](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost14.jpg)
 
 1. Enter *Jump Host* for the *Virtual machine name*
 2. Select the *Workloads* folder
 3. Click *NEXT*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost15.jpg)
+![JumpHost15](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost15.jpg)
 
 4. Select the *Compute-ResourcePool*
 5. Click *NEXT*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost16.jpg)
+![JumpHost16](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost16.jpg)
 
 6. Click *NEXT*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost17.jpg)
+![JumpHost17](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost17.jpg)
 
 7. Select the *WorkloadDatastore*
 8. Click *NEXT*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost18.jpg)
+![JumpHost18](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost18.jpg)
 
 9. Select *Demo-Net* from the *Destination Network* dropdown list  (this network was created in the Working With Your SDDC module)
 10. Click *NEXT*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost19.jpg)
+![JumpHost19](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost19.jpg)
 
 11. Click *FINISH*
 
 ### Request a Public IP for the Jump Host
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost20.jpg)
+![JumpHost20](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost20.jpg)
 
 **Navigate to the Jump Host VM you just deployed, power it on and note the IP Address**
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost21.jpg)
+![JumpHost21](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost21.jpg)
 
 1. Back in your SDDC, navigate to *Networking & Security*
 2. Click *Public IPs* in the left-hand navigation menu
@@ -204,14 +205,14 @@ If you do not have the menu item to deploy a New VM from this template, Click th
 4. Enter *Jump Host* in for the *Notes*
 5. Click *SAVE*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost22.jpg)
+![JumpHost22](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost22.jpg)
 
 6. Note the *Public IP* that was just provided
 7. Click *NAT* in the left-hand navigation menu
 
 ### Create a NAT rule for the Jump Host
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost23.jpg)
+![JumpHost23](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost23.jpg)
 
 1. Click *ADD NAT RULE*
 2. Enter *To Jump Host* in the *Name* field
@@ -221,58 +222,58 @@ If you do not have the menu item to deploy a New VM from this template, Click th
 
 ### Create a Compute Gateway FW Rules to allow RDP to the Jump Host VM
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost24.jpg)
+![JumpHost24](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost24.jpg)
 
 1. Click *Gateway Firewall* in the left-hand navigation menu
 2. Click *Compute Gateway*
 3. Click *ADD RULE*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost25.jpg)
+![JumpHost25](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost25.jpg)
 
 We will add a rule that will allow us to connect to our jump host via RDP
 
 4. Enter *RDP to Jump Host* in the *Name* field
 5. Hover over the *Destinations* field and click the pencil icon
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost26.jpg)
+![JumpHost26](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost26.jpg)
 
 We will add a group that contains our jump host's internal IP address
 
 6. Click "ADD GROUP"
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost27.jpg)
+![JumpHost27](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost27.jpg)
 
 7. Enter *Jump Host* in the *Name* field
 8. Click *Set Members*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost28.jpg)
+![JumpHost28](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost28.jpg)
 
 9. Click IP/MAC Addresses
 10. Click in the IP/MAC Addresses field and enter the interal IP of your jump host
 11. Click *APPLY*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost29.jpg)
+![JumpHost29](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost29.jpg)
 
 Note that under Compute Members it now shows 1 IPs/MACS
 
 12. Click *SAVE*
 13. Click *APPLY*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost30.jpg)
+![JumpHost30](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost30.jpg)
 
 14. Hover over the *Services* field and click the pencil icon
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost31.jpg)
+![JumpHost31](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost31.jpg)
 
 15. Enter *RDP* into the *Search* field
 16. Click the checkbox next to *RDP*
 17. Click *APPLY*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost32.jpg)
+![JumpHost32](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost32.jpg)
 
 18. Click *PUBLISH* to publish this new rule
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost33.jpg)
+![JumpHost33](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost33.jpg)
 
 We will add another rule that will allow outbound traffic from our jump host
 
@@ -281,23 +282,23 @@ We will add another rule that will allow outbound traffic from our jump host
 21. Select the *Jump Host* group you created previously for *Sources*
 22. Click *PUBLISH*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost34.jpg)
+![JumpHost34](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost34.jpg)
 
 23. Click *Management Gateway*
 24. If your *vCenter Inbound* rule does not have *ICMP ALL* under *Services*, modify the rule to allow that service and **PUBLISH** the rule when complete.
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost37.jpg)
+![JumpHost37](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost37.jpg)
 
 25. Click *Settings* for your SDDC
 26. Click the *>* arrow next to *vCenter FQDN*
 27. Click *EDIT*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost38.jpg)
+![JumpHost38](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost38.jpg)
 
 28. Select the *Private IP* in the *Resolution Address* dropdown
 29. Click *SAVE*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost36.jpg)
+![JumpHost36](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost36.jpg)
 
 Open **REMOTE DESKTOP CONNECTION** from **YOUR** desktop.  Do not open it from within the virtual desktop.
 
@@ -307,7 +308,7 @@ Open **REMOTE DESKTOP CONNECTION** from **YOUR** desktop.  Do not open it from w
 
 ### Install Firefox or Chrome into the Windows VM
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost39.jpg)
+![JumpHost39](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost39.jpg)
 
 Internet Explorer does not work well, so you'll need to download and install Firefox or Chrome into your Jump Host VM.
 
@@ -316,7 +317,7 @@ If **Server Manager** does not automatically open, open it.
 1. Click *Local Server*
 2. Click *On* next to *IE Enhanced Security Configuration*
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost40.jpg)
+![JumpHost40](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/JumpHost40.jpg)
 
 3. Click the radio button next to *Off* under *Administrators*
 4. Click the radio button next to *Off* under *Users*
@@ -338,7 +339,7 @@ Open another tab and enter the FQDN for the vCenter for your paired SDDC
 
 We will need to create Management Gateway firewall rules to allow for additional management gateway traffic including Site Recovery and vSphere Replication traffic. This needs to be done in both SDDCs.
 
-![SRM12](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRMNew1.jpg)
+![SRMNew1](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRMNew1.jpg)
 
 1. In your SDDC, click *Networking & Security*
 2. Click *Gateway Firewall* in the left-hand navigation menu
@@ -635,90 +636,168 @@ If you need to log back in to your SDDC thru the VMC console, use the *cedxx@vmw
 
 19. After you have created all four of your VMs, navigate to the VMs in the vSphere Client and ***Power On*** all four VMs.
 
-## SRM - Protect a VM
+## Using Site Recovery
 
-![SRM44](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM44.jpg)
+### Repicate VMs to Recovery Site
 
-1. Select a VM to replicate and right-click
-2. Select *All Site Recovery actions*
-3. Click *Configure Replication*
+**Navigate back to Site Recovery for your SDDC**
 
-    *NOTE*: You may need to log in to the paired site (This is your partner's site), make sure you use *cloudadmin@vmc.local* and get your partner users password. After entering you may need to repeat this step.
+![SRM100](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM100.jpg)
 
-    ![SRM45](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM45.jpg)
-4. Click *Next*
+1. Click *Replications* fromt the top menu bar
+2. Click *+ NEW*
 
-    ![SRM46](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM46.jpg)
-5. Select the Target Site
-6. If not logged in you may need to login (Remember this is your partner's site not yours)
+    ![SRM101](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM101.jpg)
 
-    ![SRM47](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM47.jpg)
-7. Enter your partners site credentials
+3. Select *ALL FOUR* of the VMs you created previously
+4. Click *NEXT*
 
-    ![SRM48](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM48.jpg)
-8. Leave all defaults and click *Next*
+    ![SRM102](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM102.jpg)
 
-    ![SRM49](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM49.jpg)
-9. Leave the default *Datastore Default* as the VM Storage Policy
-10. Select *WorkloadDatastore*
-11. Click *Next*
+5. Ensure *Auto-assign vSphere Replication Server* is selected
+6. Click *NEXT*
 
-    ![SRM50](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM50.jpg)
-12. Leave the default 1 hour for Recovery Point Objective, RPO can be as low as 5 minutes, as high as 24 hour
-13. Click *Next*
+    ![SRM103](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM103.jpg)
 
-    ![SRM51](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM51.jpg)
-14. Select *Add to new protection group*
-15. Name your Protection Group *PG#* (where # is your student number)
-16. Click *Next*
+7. Select *WorkloadDatastore*
+8. Click *NEXT*
 
-    ![SRM52](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM52.jpg)
-17. Select *Add to new recovery plan*
-18. Name your Recovery Plan **RP#** (where # is your student number)
-19. Click *Next* button
+    ![SRM104](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM104.jpg)
 
-    ![SRM53](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM53.jpg)
-20. Click *Finish*
+9. Leave all defaults for the RPO and click *NEXT*
 
-## Perform a Recovery Test
+    ![SRM105](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM105.jpg)
 
-![SRM54](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM54.jpg)
+10. Select *Do not add to protection group now*
+11. Click *NEXT*
 
-1. In the VMware Cloud on AWS portal, click the *Add Ons* tab
-2. Click on *Open Site Recovery* (You may need to allow Pop-ups in browser)
+    ![SRM106](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM106.jpg)
 
-    ![SRM55](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM55.jpg)
-3. In the Site Recovery window, click *Open*
+12. Click *FINISH
 
-    ![SRM56](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM56.jpg)
-4. Click on *Recovery Plans*
+    ![SRM107](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM107.jpg)
 
-    ![SRM57](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM57.jpg)
-5. Click on your protection group *PG#* (where # is your student number)
+13. Click *Refresh* until all VMs show a status of **OK** (this may take a couple of minutes)
 
-    ![SRM58](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM58.jpg)
-6. Click on *Recovery Plans*
-7. Click on *RP#* which should be your Recovery Plan you created in a previous step
+### Create Protection Groups and Recovery Plans
 
-    ![SRM59](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM59.jpg)
-8. Click the *Test* button
+We will create 2 Protection Groups, one for our CRM application and one for our Finance application.  A VM can only belong to one Protection Group, but a Protection Group can belong to more than one Recovery Plan.
 
-    ![SRM60](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM60.jpg)
+![SRM108](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM108.jpg)
 
-9. Leave all defaults and click *Next* button
+1. Click *Protection Groups*
+2. Click + NEW*
 
-    ![SRM61](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM61.jpg)
-10. Click *Finish* button
+    ![SRM109](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM109.jpg)
 
-    ![SRM62](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM62.jpg)
-11. Follow the progress in the Recent Tasks area at the bottom of your window
+3. Enter *CRM-PG-XX* where **XX** is your Student ID for *Name*
+4. Click *NEXT*
 
-    ![SRM63](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM63.jpg)
-12. Notice the test has successfully completed
-13. Click the *Cleanup* button to clean up the activity and return the environment to its normal state
+    ![SRM110](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM110.jpg)
 
-    ![SRM64](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM64.jpg)
-14. Click *Next*
+5. Select *Individual VMs (vSphere Replication)
+6. Click *NEXT*
 
-    ![SRM65](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM65.jpg)
-15. Click *Finish*, the environment will now be clean. Please note that during testing, your replications protecting your VM's is not interrupted
+    ![SRM111](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM111.jpg)
+
+7. Select both your *CRM VMs*
+8. Click *NEXT*
+
+    ![SRM112](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM112.jpg)
+
+    We will create a Recovery Plan that will just recover our CRM application
+
+9. Select *Add to new recovery plan*
+10. Enter *CRM-RP-XX* where **XX** is your Student ID for the *Recovery Plan Name*
+11. Click *NEXT*
+
+    ![SRM113](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM113.jpg)
+
+12. Click *FINISH*
+
+    ![SRM114](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM114.jpg)
+
+13. Repeat steps 2 thru 12 above for the FIN VMs to create the *FIN-PG-XX* protection group
+
+**If you get a *Not configured* error when creating the protection groups, ensure under Site Pair that you have configured Placeholder Datastores for each side.  Once that is done, you will need to *Restore all Placeholder VMs* for each protection group**
+
+### Create a Recovery Plan for All Applications
+
+We will create another Recovery Plan that will recover all of our applications.  As stated before, a VM can only belong to one Protection Group, but a Protection Group can belong to more than one Recovery Plan.
+
+![SRM115](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM115.jpg)
+
+1. Click *Recovery Plans*
+2. Click + NEW*
+
+    ![SRM116](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM116.jpg)
+
+3. Enter *ALL-APPS-RP-XX* where **XX** is your Student ID for *Name*
+4. Click *NEXT*
+
+    ![SRM117](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM117.jpg)
+
+5. Select *Protection groups for individual VMs or datastore groups*
+6. Select both the *CRM and FIN* Protection Groups
+7. Click *NEXT*
+
+    ![SRM118](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM118.jpg)
+
+8. Click *NEXT*
+
+    ![SRM119](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM119.jpg)
+
+9. Click *FINISH*
+
+    ![SRM120](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM120.jpg)
+
+10. You should now have three Recovery Plans, one just for the CRM app, one just for the FIN app, and one for all apps.
+
+### Perform a Recovery Test
+
+![SRM121](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM121.jpg)
+
+1. Click the *radio button* next to the *CRM-RP-XX* Recovery Plan where **XX** is your Student ID
+2. Click *TEST*
+
+    ![SRM122](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM122.jpg)
+
+3. Click *NEXT*
+
+    ![SRM123](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM123.jpg)
+
+4. Click *FINISH*
+
+    ![SRM124](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM124.jpg)
+
+5. Click the *CRM-RP-XX* Recovery Plan where **XX** is your Student ID
+
+    ![SRM125](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM125.jpg)
+
+6. Click *Recovery Steps*
+
+    ![SRM126](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM126.jpg)
+
+7. Note the status of the test
+
+    ![SRM127](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM127.jpg)
+
+8. Ensure the status shows *Test complete*
+9. Click *CLEANUP* to cleanup the activity and return the environment to its normal state
+
+    ![SRM128](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM128.jpg)
+
+10. Click *NEXT*
+
+    ![SRM129](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM129.jpg)
+
+11. Click *FINISH*
+
+    ![SRM130](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM130.jpg)
+
+12. Note the status of the cleanup until it is complete
+
+    ![SRM131](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM131.jpg)
+
+**Once the *cleanup* is complete, the Recovery Plan is in a *Ready* status and is ready for a test or a recovery.**
+
