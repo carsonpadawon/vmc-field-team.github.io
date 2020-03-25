@@ -12,13 +12,13 @@ categories: labs
 
 ## Introduction
 
-In this lab you will pair up with another student group in order to simulate the setup and configuration tasks for VMware Site Recovery Manager
+In this lab you will pair up with another student in order to simulate the setup and configuration tasks for VMware Site Recovery Manager
 
-## Activate Site Recovery Add On
+## Activate the Site Recovery Add On
 
 Important Instructions for Site Recovery Exercises
 
-PLEASE BE AWARE THAT THESE EXERCISES MUST BE PERFORMED FROM THE ASSIGNED HORIZON DESKTOP YOUR INSTRUCTORS ASSIGNED. IF YOU TRY TO PERFORM SOME OF THE EXERCISES OUTSIDE OF THE HORIZON SESSION YOU WILL EXPERIENCE SOME FAILURES.
+PLEASE BE AWARE THAT THESE EXERCISES MUST BE PERFORMED FROM THE ASSIGNED HORIZON DESKTOP YOUR INSTRUCTORS ASSIGNED OR THE JUMP HOST THAT YOU WILL CREATE AS PART OF THE LAB. IF YOU TRY TO PERFORM SOME OF THE EXERCISES OUTSIDE OF THE HORIZON SESSION OR THE JUMP HOST AS INSTRUCTED, YOU WILL EXPERIENCE SOME FAILURES.
 
 ### Activate Site Recovery
 
