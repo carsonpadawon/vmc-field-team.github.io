@@ -640,11 +640,11 @@ If you need to log back in to your SDDC thru the VMC console, use the *cedxx@vmw
 
 ### Repicate VMs to Recovery Site
 
-**Navigate back to Site Recovery for your SDDC**
-
 ![SRM100](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM100.jpg)
 
-1. Click *Replications* fromt the top menu bar
+**Navigate back to Site Recovery for your SDDC**
+
+1. Click *Replications* from the top menu bar
 2. Click *+ NEW*
 
     ![SRM101](https://s3-us-west-2.amazonaws.com/vmc-workshops-images/srm-lab/SRM101.jpg)
