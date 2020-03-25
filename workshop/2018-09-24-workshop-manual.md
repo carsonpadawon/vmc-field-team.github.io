@@ -44,3 +44,4 @@ Lab Name | Description
 [AWS Integration](https://vmc-field-team.github.io/labs/v2/aws-integration-lab/){:target="_blank"} | Learn how to integrate with native AWS services such as RDS.
 [VMware Cloud on AWS APIs](https://vmc-field-team.github.io/labs/v2/api-lab/){:target="_blank"} | Learn how to interact with VMware on AWS through APIs
 [VMware Hybrid Cloud Extension](https://vmc-field-team.github.io/labs/v2/hcx-labv3/){:target="_blank"} | Learn how VMware Hybrid Cloud Extension (HCX) technology can help with bulk and live migration to the VMware Cloud on AWS cloud platform
+[VMware Site Recovery](https://vmc-field-team.github.io/labs/v2/srm-lab/){:target="_blank"} | Learn how to use Site Recovery to protect one VMC SDDC to another VMC SDDC.
