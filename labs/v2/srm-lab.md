@@ -333,6 +333,8 @@ Open another tab and enter the FQDN for the vCenter for your paired SDDC
 
 **If you can navigate to both vCenters via their FQDN's, all connectivity is established correctly. The remainder of the work can be completed from your Remote Desktop connection to your Jump Host.**
 
+<span style="color:red">***If you have issues connecting to the VMware Cloud on AWS console from your RDP session, connect to it from your Horizon desktop.***</span>
+
 ## Prepare and Pair Site Recovery
 
 ### Firewall Rules for Site Recovery
@@ -571,7 +573,7 @@ For Placeholder Datastores, you must select a datastore at each side, so you'll 
 7. Click the *checkbox* next to *WorkloadDatastore*
 8. Click *ADD*
 
-## Create VMs to use wtih Site Recovery
+## Create VMs to use with Site Recovery
 
 You will now create four VMs to use for Site Recovery.
 
